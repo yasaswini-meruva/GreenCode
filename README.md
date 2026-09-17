@@ -11,7 +11,7 @@ Tested end-to-end: bad code scores 0/100 with 10 flagged issues; the same logic 
 ```
 Python Code → AST Analyzer (7 pattern detectors) → Efficiency Score (0-100)
                                                           ↓
-                                    IBM Granite (granite-4-h-small) → Explanation + fix
+                                    IBM/granite-3-3-8b-instruct → Explanation + fix
 ```
 
 The analyzer's findings are the **only** input to Granite's prompt — it is explicitly instructed not to invent additional issues, keeping the generated explanation grounded in real, deterministic detections rather than free-floating generation.
@@ -29,9 +29,9 @@ The analyzer's findings are the **only** input to Granite's prompt — it is exp
 | `requirements.txt` | Python packages needed. |
 | `.env.example` | Template showing the credential format needed for real Granite calls (no real secrets in this file). |
 
-## Setup — VS Code on Windows, step by step
+## Setup — Windows, step by step
 
-**1. Clone or download this repo**, then open the folder in VS Code (make sure `sample_code/` came with it as a subfolder).
+**1. Clone or download this repo**, then open the folder in VS Code or IBM Bob IDE.
 
 **2. Open a terminal**: Terminal → New Terminal.
 
@@ -77,7 +77,7 @@ streamlit run app.py
 
 ## IBM Bob usage
 
-IBM Bob (in VS Code) was used for two genuine purposes during development, not added artificially to satisfy a requirement:
+IBM Bob IDE was used for two genuine purposes during development, not added artificially to satisfy a requirement:
 - **Ideation**: reviewed `analyzer.py` and helped identify which additional inefficiency patterns were worth detecting, prioritized by likely energy impact.
 - **Debugging**: a full code review from Bob caught 4 real bugs — a scoring bug where triple-nested loops were over-penalized, a UI bug duplicating line-number text in finding cards, a silent no-op when clicking Analyze with empty input, and an unsafe file read with no encoding/error handling. All 4 were fixed and verified.
 
